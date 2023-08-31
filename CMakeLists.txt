@@ -102,6 +102,10 @@ else()
   )
 endif()
 
+# ADD
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=register")
+set (CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Wno-error=register")
+
 add_subdirectory (src/common)
 add_subdirectory (src/nvmatrix)
 add_subdirectory (src/cudaconv2)
