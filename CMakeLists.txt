@@ -23,25 +23,25 @@ if(MSVC)
   find_package (Threads REQUIRED)
 else()
   find_package (BLAS REQUIRED)
-  find_path(BLAS_INCLUDE_DIRS cblas.h
-    HINTS
-      "/System/Library/Frameworks/vecLib.framework/Versions/Current/Headers/"
-      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Headers/"
-  )
+  # find_path(BLAS_INCLUDE_DIRS cblas.h
+  #   HINTS
+  #     "/System/Library/Frameworks/vecLib.framework/Versions/Current/Headers/"
+  #     "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Accelerate.framework/Versions/Current/Frameworks/vecLib.framework/Headers/"
+  # )
 endif()
 find_package (PythonLibs 2.7 REQUIRED)
 find_package (PythonInterp 2.7 REQUIRED)
 
-find_path(CUDA_COMMON_INCLUDE_DIRS
-  helper_cuda.h
-  PATHS ${CUDA_SDK_SEARCH_PATH}
-    "/usr/local/cuda"
-    "/Developer/NVIDIA/CUDA-6.0"
-    "C:/ProgramData/NVIDIA Corporation/CUDA Samples/v6.0/common/inc"
-  PATH_SUFFIXES "samples/common/inc"
-  DOC "Location of helper_cuda.h"
-  NO_DEFAULT_PATH
-)
+# find_path(CUDA_COMMON_INCLUDE_DIRS
+#   helper_cuda.h
+#   PATHS ${CUDA_SDK_SEARCH_PATH}
+#     "/usr/local/cuda"
+#     "/Developer/NVIDIA/CUDA-6.0"
+#     "C:/ProgramData/NVIDIA Corporation/CUDA Samples/v6.0/common/inc"
+#   PATH_SUFFIXES "samples/common/inc"
+#   DOC "Location of helper_cuda.h"
+#   NO_DEFAULT_PATH
+# )
 
 if(APPLE)
   LIST(APPEND CUDA_NVCC_FLAGS -ccbin /usr/bin/clang)
@@ -78,7 +78,7 @@ endif()
 if (MSVC)
   include_directories (
     ${CUDA_INCLUDE_DIRS}
-    ${CUDA_COMMON_INCLUDE_DIRS}
+   #  ${CUDA_COMMON_INCLUDE_DIRS}
     ${PYTHON_INCLUDE_DIRS}
     ${NUMPY_INCLUDE_DIRS}/numpy
     ${MKL_INCLUDE_DIR}
@@ -90,9 +90,9 @@ if (MSVC)
   )
 else()
   include_directories (
-    ${BLAS_INCLUDE_DIRS}
+  #   ${BLAS_INCLUDE_DIRS}
     ${CUDA_INCLUDE_DIRS}
-    ${CUDA_COMMON_INCLUDE_DIRS}
+  #   ${CUDA_COMMON_INCLUDE_DIRS}
     ${PYTHON_INCLUDE_DIRS}
     ${NUMPY_INCLUDE_DIRS}/numpy
     include/common
